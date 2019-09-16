@@ -29,5 +29,5 @@ class Book {
         return "$title,${reasonToRead?.replace(",", "~@")},$hasBeenRead,$id"
     }
 
-    
+
 }
