@@ -1,5 +1,6 @@
 package com.rybarstudios.datapersistenceassignment1
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
@@ -8,6 +9,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        const val NEW_ENTRY_KEY = "New Entry"
+        const val EDIT_ENTRY_KEY = "Edit Entry"
+    }
+
     val bookList = mutableListOf<Book>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,14 +21,27 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         for (book in testData) {
+            bookList.add(book)
             listLayout.addView(buildItemView(book))
+        }
+
+        floatingActionButton.setOnClickListener {
+            val intent = Intent(this, EditBookActivity::class.java)
+            intent.putExtra(NEW_ENTRY_KEY, listLayout.childCount)
+            startActivity(intent)
         }
     }
 
-    fun buildItemView(book: Book): TextView {
+    private fun buildItemView(book: Book): TextView {
         val view = TextView(this)
         view.text = book.title
         view.textSize = 24f
+
+        view.setOnClickListener {
+            val intent = Intent(this, EditBookActivity::class.java)
+            intent.putExtra(EDIT_ENTRY_KEY, book.toCsvString())
+            startActivity(intent)
+        }
         return view
     }
 
