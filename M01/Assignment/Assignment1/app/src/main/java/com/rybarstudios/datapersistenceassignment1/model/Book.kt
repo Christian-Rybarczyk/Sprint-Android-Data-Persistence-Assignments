@@ -1,13 +1,15 @@
 package com.rybarstudios.datapersistenceassignment1.model
 
-class Book {
+import java.io.Serializable
+
+class Book : Serializable {
 
     var title: String? = null
     var reasonToRead: String? = null
     var hasBeenRead: Boolean = false
     var id: String? = null
 
-    constructor(title: String, reasonToRead: String, hasBeenRead: Boolean, id: String) {
+    constructor(title: String?, reasonToRead: String?, hasBeenRead: Boolean = false, id: String?) {
         this.title = title
         this.reasonToRead = reasonToRead
         this.hasBeenRead = hasBeenRead
