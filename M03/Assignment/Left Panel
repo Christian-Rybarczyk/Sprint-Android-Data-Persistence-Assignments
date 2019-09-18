@@ -1,1 +1,23 @@
+CREATE TABLE players (
+  id INTEGER PRIMARY KEY,
+  first_name TEXT,
+  last_name TEXT,
+  age INTEGER
+);
 
+CREATE TABLE teams (
+  id INTEGER PRIMARY KEY,
+  name TEXT
+);
+
+INSERT INTO players (id, first_name, last_name, age) VALUES (1, "Christian", "Rybarczyk", 26);
+
+INSERT INTO players (id, first_name, last_name, age) VALUES (2, "Matthew", "Dubuc", 24);
+
+INSERT INTO players (id, first_name, last_name, age) VALUES (3, "Dominic", "Dubuc", 17);
+
+INSERT INTO players (id, first_name, last_name, age) VALUES (4, "Easton", "Larrabee", 13);
+
+INSERT INTO players (id, first_name, last_name, age) VALUES (5, "Jack", "Eichel", 22);
+
+INSERT INTO players (id, first_name, last_name, age) VALUES (6, "Victor", "Oloofson", 24);
