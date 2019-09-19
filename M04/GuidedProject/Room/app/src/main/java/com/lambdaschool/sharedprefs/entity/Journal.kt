@@ -1,5 +1,6 @@
 package com.lambdaschool.sharedprefs.entity
 
+import androidx.room.Entity
 import com.lambdaschool.sharedprefs.Prefs
 import com.lambdaschool.sharedprefs.model.JournalEntry
 
@@ -11,7 +12,7 @@ class Journal {
     companion object {
 
         fun createJournalEntry(): JournalEntry {
-            return JournalEntry(JournalEntry.INVALID_ID)
+            return JournalEntry(0)
         }
 
         fun createJournalEntry(text: String): JournalEntry {

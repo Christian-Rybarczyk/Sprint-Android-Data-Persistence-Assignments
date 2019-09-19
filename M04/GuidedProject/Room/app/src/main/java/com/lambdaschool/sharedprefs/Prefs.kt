@@ -3,16 +3,11 @@ package com.lambdaschool.sharedprefs
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.lambdaschool.sharedprefs.model.JournalEntry
 
-<<<<<<< HEAD
-// TODO: 15. A Shared Preferences helper class
 class Prefs(context: Context): JournalRepoInterface {
-
-=======
-// TODO 2: Declare implementation of interface here and add overrides
-class Prefs(context: Context): JournalRepoInterface {
->>>>>>> origin/master
     companion object {
         private const val JOURNAL_PREFERENCES = "JournalPreferences"
 
@@ -94,6 +89,9 @@ class Prefs(context: Context): JournalRepoInterface {
                 }
             }
         }
+
+        val liveData = MutableLiveData<List<JournalEntry>>()
+        liveData.postValue(entryList)
         return entryList
     }
 

@@ -1,13 +1,10 @@
 package com.lambdaschool.sharedprefs
 
 import android.app.Application
+import com.lambdaschool.sharedprefs.database.JournalDBRepo
 import timber.log.Timber
 
-<<<<<<< HEAD
-// TODO: 5. Lazy initialization of a prefs object for Activities to use...
-=======
-// TODO 4: Change to the repo interface here
->>>>>>> origin/master
+// TODO 3: Notice that we are still using the interface we created
 val repo: JournalRepoInterface by lazy {
     App.repo!!
 }
@@ -32,16 +29,11 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
-<<<<<<< HEAD
-//        repo = Prefs(applicationContext)
-        repo = JournalFileRepo(applicationContext)
-        // TODO: 2. Configure Timber logging
-=======
-        // TODO 5: Instantiate the File repo here instead of Prefs
         //repo = Prefs(applicationContext)
-        repo = JournalFileRepo(applicationContext)
+//        repo = JournalFileRepo(applicationContext)
+        repo = JournalDBRepo(applicationContext)
+        // TODO 18: Instantiate the DB repo here instead
 
->>>>>>> origin/master
         // "Timber" Library
         if (BuildConfig.DEBUG) {
             Timber.plant(MyDebugTree())

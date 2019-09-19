@@ -1,10 +1,9 @@
 package com.lambdaschool.sharedprefs.model
 
 import android.net.Uri
-<<<<<<< HEAD
-import android.util.JsonReader
-=======
->>>>>>> origin/master
+import androidx.annotation.NonNull
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.Serializable
@@ -12,17 +11,23 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+// TODO 6: Annotate the Entity
+@Entity
 class JournalEntry : Serializable {
 
     companion object {
         const val TAG = "JournalEntry"
-        const val INVALID_ID = -1
+        // TODO 8: This must be 0 if we want autoGenerate to work
+        const val INVALID_ID = 0
     }
 
     var date: String? = null
     var entryText: String? = null
-    private var image: String? = null
+    var image: String? = null
     var dayRating: Int = 0
+
+    // TODO 7: Let's make id the primary key
+    @PrimaryKey(autoGenerate = true)
     var id: Int = 0
 
     constructor(id: Int) {
@@ -33,7 +38,6 @@ class JournalEntry : Serializable {
         initializeDate()
     }
 
-<<<<<<< HEAD
     constructor(jsonObject: JSONObject) {
         try {
             this.date = jsonObject.getString("date")
@@ -55,43 +59,31 @@ class JournalEntry : Serializable {
         } catch (e: JSONException) {
             this.dayRating = 0
         }
+        try {
             this.id = jsonObject.getInt("id")
+        } catch (e: JSONException) {
+            this.id = -1
+        }
     }
 
     fun toJsonObject(): JSONObject? {
         try {
             return JSONObject().apply {
                 put("date", date)
-                put("entryText", entryText)
+                put("entry_text", entryText)
                 put("image", image)
-                put("dayRating", dayRating)
+                put("day_rating", dayRating)
                 put("id", id)
             }
-        } catch (e: JSONException) {
+        } catch (e1: JSONException) {
             return try {
-                JSONObject("{\"date\" : \"$date\", \"entry_text\" : \"$entryText\", \"image\" : \"$image\", \"day_rating\" : \"$dayRating\", \"id\" : \"$id\"}")
+                JSONObject("{\"date\" : \"$date\", \"entry_text\" : \"$entryText\", \"image\": \"$image\", \"day_rating\": $dayRating, \"id\": $id}")
             } catch (e2: JSONException) {
                 e2.printStackTrace()
                 return null
             }
         }
-=======
-    // TODO 11: Write constructor from JSONObject
 
-    // TODO 7: Implement toJSONObject method
-    fun toJsonObject(): JSONObject {
-        try {
-            return JSONObject().apply {
-                put("date", date)
-                put("entry_text", entryText)
-                put("image", image)
-                put("day_rating", dayRating)
-            }
-        } catch (e: JSONException) {
-            return
-        }
-
->>>>>>> origin/master
     }
 
     constructor(csvString: String) {
@@ -136,7 +128,7 @@ class JournalEntry : Serializable {
         val dateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.US)
         val date = Date()
 
-        this.date = (date.time / 1000)
+        this.date = (date.time / 1000).toString()
     }
 
     fun getImage(): Uri? {

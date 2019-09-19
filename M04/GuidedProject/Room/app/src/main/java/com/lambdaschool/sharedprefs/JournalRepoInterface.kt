@@ -1,14 +1,13 @@
 package com.lambdaschool.sharedprefs
 
+import androidx.lifecycle.LiveData
 import com.lambdaschool.sharedprefs.model.JournalEntry
 
-<<<<<<< HEAD
-=======
-// TODO 1: Extract behavior from Prefs to an interface
+// TODO 4: We want the database repo to implement this interface
 
->>>>>>> origin/master
 interface JournalRepoInterface {
     fun createEntry(entry: JournalEntry)
+    // TODO 28: LiveData in the interface
     fun readAllEntries(): MutableList<JournalEntry>
     fun updateEntry(entry: JournalEntry)
     fun deleteEntry(entry: JournalEntry)
