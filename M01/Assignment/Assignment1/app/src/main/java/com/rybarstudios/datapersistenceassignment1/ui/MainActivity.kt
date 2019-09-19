@@ -2,6 +2,7 @@ package com.rybarstudios.datapersistenceassignment1.ui
 
 import android.app.Activity
 import android.content.Intent
+import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
@@ -88,5 +89,16 @@ class MainActivity : AppCompatActivity() {
         if (count == 0) {
             listLayout.addView(buildItemView(book))
         }
+    }
+
+    class CreateAsyncTask() : AsyncTask<Book, Void, Unit>() {
+        override fun doInBackground(vararg book: Book?) {
+            if (book.isNotEmpty()) {
+                book[0]?.let {
+
+                }
+            }
+        }
+
     }
 }
