@@ -1,12 +1,16 @@
 package com.rybarstudios.datapersistenceassignment1.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
 
+@Entity
 class Book : Serializable {
 
     var title: String? = null
     var reasonToRead: String? = null
     var hasBeenRead: Boolean = false
+    @PrimaryKey(autoGenerate = true)
     var id: String? = null
 
     constructor(title: String?, reasonToRead: String?, hasBeenRead: Boolean = false, id: String?) {
