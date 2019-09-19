@@ -1,10 +1,11 @@
-package com.rybarstudios.datapersistenceassignment1
+package com.rybarstudios.datapersistenceassignment1.ui
 
 import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import com.rybarstudios.datapersistenceassignment1.R
 import com.rybarstudios.datapersistenceassignment1.model.Book
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -33,7 +34,9 @@ class MainActivity : AppCompatActivity() {
         floatingActionButton.setOnClickListener {
             val intent = Intent(this, EditBookActivity::class.java)
             intent.putExtra(NEW_ENTRY_KEY, listLayout.childCount.toString())
-            startActivityForResult(intent, ENTRY_REQUEST_CODE)
+            startActivityForResult(intent,
+                ENTRY_REQUEST_CODE
+            )
         }
     }
 
@@ -49,7 +52,9 @@ class MainActivity : AppCompatActivity() {
         view.setOnClickListener {
             val intent = Intent(this, EditBookActivity::class.java)
             intent.putExtra(EDIT_ENTRY_KEY, book.toCsvString())
-            startActivityForResult(intent, EDIT_REQUEST_CODE)
+            startActivityForResult(intent,
+                EDIT_REQUEST_CODE
+            )
         }
         return view
     }

@@ -1,9 +1,10 @@
-package com.rybarstudios.datapersistenceassignment1
+package com.rybarstudios.datapersistenceassignment1.ui
 
 import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.rybarstudios.datapersistenceassignment1.R
 import com.rybarstudios.datapersistenceassignment1.model.Book
 import kotlinx.android.synthetic.main.activity_edit_book.*
 
