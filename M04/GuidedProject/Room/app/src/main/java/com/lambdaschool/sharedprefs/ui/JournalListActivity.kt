@@ -1,6 +1,7 @@
 package com.lambdaschool.sharedprefs.ui
 
 import android.content.Intent
+import android.os.AsyncTask
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import com.lambdaschool.sharedprefs.repo
 import kotlinx.android.synthetic.main.activity_journal_list.*
 import kotlinx.android.synthetic.main.content_journal_list.*
 import timber.log.Timber.i
+import java.lang.ref.WeakReference
 
 class JournalListActivity : AppCompatActivity() {
 
@@ -42,13 +44,12 @@ class JournalListActivity : AppCompatActivity() {
         i("onCreate")
 
         // TODO 17: Replace the call here by an AsyncTask
-        entryList = repo.readAllEntries()
+//        entryList = repo.readAllEntries()
+
+        ReadAllEntriesAsyncTask(this).execute()
 
         // TODO 22: Extract update functionality
-        listLayout.removeAllViews()
-        entryList.forEach { entry ->
-            listLayout.addView(createEntryView(entry))
-        }
+        updateLayout()
 
         // TODO 28: Replace the call above by observing LiveData from the ViewModel
     }
@@ -116,19 +117,57 @@ class JournalListActivity : AppCompatActivity() {
             if (requestCode == NEW_ENTRY_REQUEST) {
                 if (data != null) {
                     val entry = data.getSerializableExtra(JournalEntry.TAG) as JournalEntry
-                    repo.createEntry(entry) // TODO 16a: Notice the call here, replace with AsyncTask
+//                    repo.createEntry(entry) // TODO 16a: Notice the call here, replace with AsyncTask
+                    CreateAsyncTask().execute(entry)
                 }
             } else if (requestCode == EDIT_ENTRY_REQUEST) {
                 if (data != null) {
                     val entry = data.getSerializableExtra(JournalEntry.TAG) as JournalEntry
                     entryList[entry.id] = entry
-                    repo.updateEntry(entry) // TODO 16b. Notice the call here, replace with AsyncTask
+//                    repo.updateEntry(entry) // TODO 16b. Notice the call here, replace with AsyncTask
+                    UpdateAsyncTask().execute(entry)
                 }
             }
         }
     }
 
     // TODO 19: Create AsyncTask
+    class CreateAsyncTask : AsyncTask<JournalEntry, Void, Unit>() {
+        override fun doInBackground(vararg entries: JournalEntry?) {
+            if (entries.isNotEmpty()) {
+                entries[0]?.let {
+                    repo.createEntry(it)
+                }
+            }
+        }
+
+    }
     // TODO 20: Update AsyncTask
+    class UpdateAsyncTask : AsyncTask<JournalEntry, Void, Unit>() {
+        override fun doInBackground(vararg entries: JournalEntry?) {
+            if (entries.isNotEmpty()) {
+                entries[0]?.let {
+                    repo.updateEntry(it)
+                }
+            }
+        }
+
+    }
     // TODO 21: ReadAll AsyncTask
+    class ReadAllEntriesAsyncTask(activity: JournalListActivity) : AsyncTask<Void, Void, MutableList<JournalEntry>>() {
+
+        val actRef = WeakReference(activity)
+        override fun doInBackground(vararg voids: Void?): MutableList<JournalEntry> {
+            return repo.readAllEntries()
+        }
+
+        override fun onPostExecute(result: MutableList<JournalEntry>?) {
+            result?.let {
+                actRef.get()?.let {
+                    it.entryList = result
+                    it.updateLayout(it.entryList)
+                }
+            }
+        }
+    }
 }

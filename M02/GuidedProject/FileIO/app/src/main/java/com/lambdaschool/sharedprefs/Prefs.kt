@@ -5,8 +5,14 @@ import android.content.SharedPreferences
 import android.graphics.Color
 import com.lambdaschool.sharedprefs.model.JournalEntry
 
+<<<<<<< HEAD
+// TODO: 15. A Shared Preferences helper class
+class Prefs(context: Context): JournalRepoInterface {
+
+=======
 // TODO 2: Declare implementation of interface here and add overrides
 class Prefs(context: Context): JournalRepoInterface {
+>>>>>>> origin/master
     companion object {
         private const val JOURNAL_PREFERENCES = "JournalPreferences"
 

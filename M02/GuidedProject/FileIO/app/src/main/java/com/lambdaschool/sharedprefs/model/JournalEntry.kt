@@ -1,6 +1,10 @@
 package com.lambdaschool.sharedprefs.model
 
 import android.net.Uri
+<<<<<<< HEAD
+import android.util.JsonReader
+=======
+>>>>>>> origin/master
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.Serializable
@@ -29,6 +33,49 @@ class JournalEntry : Serializable {
         initializeDate()
     }
 
+<<<<<<< HEAD
+    constructor(jsonObject: JSONObject) {
+        try {
+            this.date = jsonObject.getString("date")
+        } catch (e: JSONException) {
+            this.date = (Date().time / 1000).toString()
+        }
+        try {
+            this.entryText = jsonObject.getString("entry_text")
+        } catch (e: JSONException) {
+            this.entryText = ""
+        }
+        try {
+            this.image = jsonObject.getString("image")
+        } catch (e: JSONException) {
+            this.image = ""
+        }
+        try {
+            this.dayRating = jsonObject.getInt("day_rating")
+        } catch (e: JSONException) {
+            this.dayRating = 0
+        }
+            this.id = jsonObject.getInt("id")
+    }
+
+    fun toJsonObject(): JSONObject? {
+        try {
+            return JSONObject().apply {
+                put("date", date)
+                put("entryText", entryText)
+                put("image", image)
+                put("dayRating", dayRating)
+                put("id", id)
+            }
+        } catch (e: JSONException) {
+            return try {
+                JSONObject("{\"date\" : \"$date\", \"entry_text\" : \"$entryText\", \"image\" : \"$image\", \"day_rating\" : \"$dayRating\", \"id\" : \"$id\"}")
+            } catch (e2: JSONException) {
+                e2.printStackTrace()
+                return null
+            }
+        }
+=======
     // TODO 11: Write constructor from JSONObject
 
     // TODO 7: Implement toJSONObject method
@@ -44,6 +91,7 @@ class JournalEntry : Serializable {
             return
         }
 
+>>>>>>> origin/master
     }
 
     constructor(csvString: String) {
@@ -88,7 +136,7 @@ class JournalEntry : Serializable {
         val dateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.US)
         val date = Date()
 
-        this.date = dateFormat.format(date)
+        this.date = (date.time / 1000)
     }
 
     fun getImage(): Uri? {

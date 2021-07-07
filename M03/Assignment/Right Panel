@@ -1,0 +1,19 @@
+//READ data
+SELECT * FROM players;
+SELECT * FROM players WHERE id = 3;
+SELECT first_name FROM players;
+SELECT first_name, last_name FROM players;
+SELECT * FROM players WHERE id BETWEEN 2 AND 6;
+SELECT * FROM players WHERE age IN (17, 22, 26, 40);
+SELECT * FROM players WHERE first_name LIKE "Chris%";
+SELECT * FROM players WHERE age LIKE "2%";
+
+//Update data
+SELECT * FROM players WHERE id = 5;
+UPDATE players SET first_name="Brian" WHERE id=5;
+SELECT * FROM players WHERE id=5;
+
+//Delete data
+SELECT * FROM players WHERE id = 2;
+DELETE FROM players WHERE id =2;
+SELECT * FROM players WHERE id=2;

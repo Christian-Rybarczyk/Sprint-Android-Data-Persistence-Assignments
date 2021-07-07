@@ -1,12 +1,12 @@
 package com.lambdaschool.sharedprefs.entity
 
+import androidx.room.Entity
 import com.lambdaschool.sharedprefs.Prefs
 import com.lambdaschool.sharedprefs.model.JournalEntry
 
 /**
  * Entity class to hold Journal data and logic (business rules)
  */
-
 class Journal {
 
     companion object {
